@@ -159,7 +159,12 @@ export class GamesService {
       throw new NotFoundException('No games found');
     }
 
-    const randomIndex = Math.floor(Math.random() * games.length);
-    return games[randomIndex];
+    // Shuffle the games array
+    for (let i = games.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [games[i], games[j]] = [games[j], games[i]];
+    }
+
+    return games[0];
   }
 }
